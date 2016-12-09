@@ -14,8 +14,6 @@ namespace CommandLine.Factories
 {
     internal class ActionDescriptorFactory
     {
-
-
         public static ActionDescriptor CreateFor(MethodInfo method)
         {
             var actionAttribute = method.GetCustomAttribute<ActionAttribute>();

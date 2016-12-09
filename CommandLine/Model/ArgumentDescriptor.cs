@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using CommandLine.Contracts;
 
 namespace CommandLine.Model
@@ -23,6 +26,16 @@ namespace CommandLine.Model
             DefaultValue = defaultValue;
             Description = description;
             MultiValued = multiValued;
+
+            if (type.IsEnum)
+            {
+                AllowedValues = Enum.GetValues(type).Cast<object>().Select(x => x.ToString().ToLower()).ToList();
+            }
+
+            if (type == typeof(bool))
+            {
+                IsBooleanSwitch = true;
+            }
         }
 
         public string Name { get; }
@@ -42,5 +55,9 @@ namespace CommandLine.Model
         public string Description { get; }
 
         public bool MultiValued { get; }
+
+        public IEnumerable<string> AllowedValues { get; } = Enumerable.Empty<string>();
+
+        public bool IsBooleanSwitch { get; }
     }
 }

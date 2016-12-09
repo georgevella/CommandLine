@@ -33,14 +33,14 @@ namespace CommandLine.Tests
         public void CommandWithNoActions_ThrowsException()
         {
 
-            Action a = () => CommandDescriptorFactory.CreateFor<CommandWithNoActions>();
+            System.Action a = () => CommandDescriptorFactory.CreateFor<CommandWithNoActions>();
             a.ShouldThrow<InvalidOperationException>();
         }
 
         [Fact]
         public void CommandsWithoutAttribute_ThrowException()
         {
-            Action a = () => CommandDescriptorFactory.CreateFor<CommandWithoutAttribute>();
+            System.Action a = () => CommandDescriptorFactory.CreateFor<CommandWithoutAttribute>();
             a.ShouldThrow<InvalidOperationException>();
         }
 

@@ -8,47 +8,50 @@ namespace CommandLine
     public class CommandInvoker
     {
         private readonly CommandDescriptor _descriptor;
+        private readonly ActionDescriptor _action;
         private readonly Arguments _args;
+        private readonly object _commandInstance;
 
-        public CommandInvoker(CommandDescriptor descriptor, Arguments args)
+        public CommandInvoker(CommandDescriptor descriptor, ActionDescriptor action, Arguments args, object commandInstance)
         {
+            if (descriptor == null) throw new ArgumentNullException(nameof(descriptor));
+            if (action == null) throw new ArgumentNullException(nameof(action));
+            if (args == null) throw new ArgumentNullException(nameof(args));
+            if (commandInstance == null) throw new ArgumentNullException(nameof(commandInstance));
+
+
+            var targetType = commandInstance.GetType();
+            if (targetType != descriptor.Type)
+                throw new InvalidOperationException();
+
             _descriptor = descriptor;
+            _action = action;
             _args = args;
+            _commandInstance = commandInstance;
         }
 
-        public void Run(object target)
+        public void Run()
         {
-            var targetType = target.GetType();
-            if (targetType != _descriptor.Type)
-                throw new InvalidOperationException();
-
-            if (!string.IsNullOrEmpty(_args.Action) && !_descriptor.Actions.ContainsKey(_args.Action))
-                throw new InvalidOperationException();
-
-            var actionDescriptor = string.IsNullOrEmpty(_args.Action)
-                ? _descriptor.DefaultAction
-                : _descriptor.Actions[_args.Action];
-
             var methodArguments = new List<object>(
-                Enumerable.Repeat(default(object), actionDescriptor.Arguments.Count)
+                Enumerable.Repeat(default(object), _action.Arguments.Count)
                 );
 
-            foreach (var arg in actionDescriptor.Arguments)
+            foreach (var arg in _action.Arguments)
             {
-                if (!_args.ContainsKey(arg.Name))
+                if (!_args.Contains(arg.Name))
                 {
                     // argument is missing from CLI args
                     throw new InvalidOperationException();
                 }
 
-                var rawValue = _args[arg.Name];
+                var parsedArgument = _args[arg.Name];
 
-                var actualValue = ChangeType(rawValue, arg);
+                var actualValue = ChangeType(parsedArgument.Value, arg);
 
                 arg.Setter.SetValue(methodArguments, actualValue);
             }
 
-            actionDescriptor.MethodInfo.Invoke(target, methodArguments.ToArray());
+            _action.MethodInfo.Invoke(_commandInstance, methodArguments.ToArray());
         }
 
         private object ChangeType(string rawValue, ArgumentDescriptor argumentDescriptor)

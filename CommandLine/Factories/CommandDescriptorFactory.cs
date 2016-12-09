@@ -15,7 +15,11 @@ namespace CommandLine.Factories
             where T : class
         {
             var type = typeof(T);
+            return CreateFor(type);
+        }
 
+        public static CommandDescriptor CreateFor(Type type)
+        {
             var commandAttribute = type.GetCustomAttribute<CommandAttribute>();
             if (commandAttribute == null)
                 throw new InvalidOperationException();
@@ -50,6 +54,8 @@ namespace CommandLine.Factories
             }
             else
             {
+                if (actionList.Count(descriptor => descriptor.IsDefault) > 1)
+                    throw new InvalidOperationException("Only one action can be tagged as default.");
                 defaultAction = actionList.FirstOrDefault(x => x.IsDefault);
                 if (defaultAction != null)
                     actionList.Remove(defaultAction);

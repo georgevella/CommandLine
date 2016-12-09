@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using CommandLine.Factories;
 using CommandLine.Model;
 using CommandLine.Tests.Commands;
@@ -18,12 +19,14 @@ namespace CommandLine.Tests
 
             var commandInstance = new RunCommand();
 
-            var invoker = new CommandInvoker(descriptor, new Arguments()
-            {
-                {"path", expectedFilePath}
-            });
+            var args = new Arguments(
+                new[]
+                {
+                    new ParsedArgument(0, descriptor.DefaultAction.Arguments.First(), expectedFilePath),
+                });
 
-            invoker.Run(commandInstance);
+            var invoker = new CommandInvoker(descriptor, descriptor.DefaultAction, args, commandInstance);
+            invoker.Run();
 
             commandInstance.Path.Should().Be(expectedFilePath);
         }
@@ -35,9 +38,9 @@ namespace CommandLine.Tests
 
             var commandInstance = new RunCommand();
 
-            var invoker = new CommandInvoker(descriptor, new Arguments());
+            var invoker = new CommandInvoker(descriptor, descriptor.DefaultAction, new Arguments(), commandInstance);
 
-            Action a = () => invoker.Run(commandInstance);
+            System.Action a = () => invoker.Run();
             a.ShouldThrow<InvalidOperationException>();
         }
     }

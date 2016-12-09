@@ -1,18 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{899EB9CB-5F12-41AB-805F-170929EA2A85}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{E655BAF2-3900-4F7E-9A92-6DBE16ADF502}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CommandLine</RootNamespace>
-    <AssemblyName>CommandLine</AssemblyName>
+    <RootNamespace>TestCliApp</RootNamespace>
+    <AssemblyName>TestCliApp</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,31 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandInvoker.cs" />
-    <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="Factories\ArgumentDescriptorFactory.cs" />
-    <Compile Include="Internals\SupportedPrimitiveTypes.cs" />
-    <Compile Include="Model\ActionDescriptor.cs" />
-    <Compile Include="Contracts\ICommand.cs" />
-    <Compile Include="Extensions\MemberInfoExtensions.cs" />
-    <Compile Include="Factories\ActionDescriptorFactory.cs" />
-    <Compile Include="Attributes\ActionAttribute.cs" />
-    <Compile Include="Attributes\CommandAttribute.cs" />
-    <Compile Include="Attributes\ArgumentAttribute.cs" />
-    <Compile Include="Model\ApplicationDescription.cs" />
-    <Compile Include="Model\Arguments.cs" />
-    <Compile Include="Model\CommandDescriptor.cs" />
-    <Compile Include="Factories\CommandDescriptorFactory.cs" />
-    <Compile Include="Model\ArgumentDescriptor.cs" />
-    <Compile Include="Contracts\IValueSetter.cs" />
-    <Compile Include="Model\ParsedArgument.cs" />
-    <Compile Include="Parser\NamedArgumentType.cs" />
-    <Compile Include="Parser\Parser.cs" />
-    <Compile Include="Parser\ParserConfiguration.cs" />
-    <Compile Include="Parser\ParserResult.cs" />
-    <Compile Include="Parser\ParserResultType.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValueSetters\MethodArgumentValueSetter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>

@@ -17,7 +17,7 @@ namespace CommandLine.Model
             DefaultAction = defaultAction;
             Description = description;
             Actions = actionList.ToDictionary(a => a.Name);
-            Command = command;
+            Command = command.ToLower();
             HasDefaultAction = defaultAction != null;
         }
 
