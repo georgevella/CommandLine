@@ -2,8 +2,10 @@
 using System.ComponentModel;
 using System.Reflection;
 using CommandLine.Attributes;
+using CommandLine.Contracts;
 using CommandLine.Internals;
 using CommandLine.Model;
+using CommandLine.Validators;
 using CommandLine.ValueSetters;
 
 namespace CommandLine.Factories
@@ -24,10 +26,15 @@ namespace CommandLine.Factories
             if (argumentType == null)
                 throw new InvalidOperationException();
 
+            var validator = ArgumentValidatorFactory.GetValidatorFromType(argumentType);
+            var valueProvider = ArgumentValueProviderFactory.GetValueProviderForType(argumentType);
+
             var argDescriptor = new ArgumentDescriptor(
                 argumentName,
                 argumentType,
                 new MethodArgumentValueSetter(param),
+                validator,
+                valueProvider,
                 argumentAttribute.ShortName,
                 argumentAttribute.IsOptional,
                 defaultValueAttribute?.Value,
@@ -43,10 +50,15 @@ namespace CommandLine.Factories
             if (argumentType == null)
                 throw new InvalidOperationException();
 
+            var validator = ArgumentValidatorFactory.GetValidatorFromType(argumentType);
+            var valueProvider = ArgumentValueProviderFactory.GetValueProviderForType(argumentType);
+
             var argDescriptor = new ArgumentDescriptor(
                 param.Name.ToLower(),
                 argumentType,
                 new MethodArgumentValueSetter(param),
+                validator,
+                valueProvider,
                 isOptional: param.IsOptional,
                 defaultValue: param.DefaultValue
             );

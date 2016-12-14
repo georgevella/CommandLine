@@ -1,4 +1,5 @@
-﻿using CommandLine.Attributes;
+﻿using System.IO;
+using CommandLine.Attributes;
 
 namespace CommandLine.Tests.Commands
 {
@@ -9,6 +10,19 @@ namespace CommandLine.Tests.Commands
 
         [Action]
         public int Program(string path)
+        {
+            Path = path;
+            return 0;
+        }
+    }
+
+    [Command(Name = "run")]
+    public class AdvancedRunCommand
+    {
+        public FileInfo Path { get; set; }
+
+        [Action]
+        public int Program(FileInfo path)
         {
             Path = path;
             return 0;

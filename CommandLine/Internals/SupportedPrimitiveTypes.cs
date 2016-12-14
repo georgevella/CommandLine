@@ -8,7 +8,7 @@ namespace CommandLine.Internals
 {
     public static class SupportedPrimitiveTypes
     {
-        private static readonly List<Type> supportedPrimitiveTypes = new List<Type>()
+        private static readonly List<Type> _supportedPrimitiveTypes = new List<Type>()
         {
             // standard primitives
             typeof(int),
@@ -59,7 +59,7 @@ namespace CommandLine.Internals
             if (actualType.IsEnum)
                 return true;
 
-            if (supportedPrimitiveTypes.Contains(actualType))
+            if (_supportedPrimitiveTypes.Contains(actualType))
                 return true;
 
             return false;
@@ -74,15 +74,15 @@ namespace CommandLine.Internals
 
             var actualType = type;
 
+            if (actualType.IsEnum)
+                return actualType;
+
             if (type.IsEnumerableOrCollection())
             {
                 actualType = type.GetEnumerableOrCollectionItemType();
             }
 
-            if (actualType.IsEnum)
-                return actualType;
-
-            if (supportedPrimitiveTypes.Contains(actualType))
+            if (_supportedPrimitiveTypes.Contains(actualType))
                 return actualType;
 
             return null;

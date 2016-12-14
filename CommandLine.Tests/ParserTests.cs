@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using CommandLine.Factories;
 using CommandLine.Model;
 using CommandLine.Parser;
@@ -21,10 +22,10 @@ namespace CommandLine.Tests
                     command => command.Program(default(string)),
                     new Dictionary<string, string>()
                     {
-                        {"path", "C:\\some random path\\something.exe" }
+                        {"path", "C:\\some random path\\something.exe"}
                     }
-                    ),
-                new[] { "run", "-path", "C:\\some random path\\something.exe"},
+                ),
+                new[] {"run", "-path", "C:\\some random path\\something.exe"},
                 1,
             },
             new object[]
@@ -33,10 +34,10 @@ namespace CommandLine.Tests
                     command => command.Program(default(string)),
                     new Dictionary<string, string>()
                     {
-                        {"path", "C:\\some random path\\something.exe" }
+                        {"path", "C:\\some random path\\something.exe"}
                     }
-                    ),
-                new[] { "run", "-path=C:\\some random path\\something.exe"},
+                ),
+                new[] {"run", "-path=C:\\some random path\\something.exe"},
                 1,
             },
             new object[]
@@ -45,10 +46,10 @@ namespace CommandLine.Tests
                     command => command.Program(default(string)),
                     new Dictionary<string, string>()
                     {
-                        {"path", "C:\\some random path\\something.exe" }
+                        {"path", "C:\\some random path\\something.exe"}
                     }
-                    ),
-                new[] { "run", "-path:C:\\some random path\\something.exe"},
+                ),
+                new[] {"run", "-path:C:\\some random path\\something.exe"},
                 1,
             },
             new object[]
@@ -57,10 +58,10 @@ namespace CommandLine.Tests
                     command => command.Get(default(string)),
                     new Dictionary<string, string>()
                     {
-                        {"name", "something" }
+                        {"name", "something"}
                     }
-                    ),
-                new[] { "config", "-name", "something"},
+                ),
+                new[] {"config", "-name", "something"},
                 1,
             },
             new object[]
@@ -69,10 +70,10 @@ namespace CommandLine.Tests
                     command => command.Get(default(string)),
                     new Dictionary<string, string>()
                     {
-                        {"name", "something" }
+                        {"name", "something"}
                     }
-                    ),
-                new[] { "config", "get", "-name", "something"},
+                ),
+                new[] {"config", "get", "-name", "something"},
                 1,
             },
             new object[]
@@ -81,14 +82,26 @@ namespace CommandLine.Tests
                     command => command.Set(default(string), default(string), ValueType.String),
                     new Dictionary<string, string>()
                     {
-                        {"name", "something" },
-                        {"value", "xyz" },
-                        {"type", $"{ValueType.String}" }
+                        {"name", "something"},
+                        {"value", "xyz"},
+                        {"type", $"{ValueType.String}"}
                     }
-                    ),
-                new[] { "config", "set", "-name", "something", "-value:xyz", $"-type:{ValueType.String}"},
+                ),
+                new[] {"config", "set", "-name", "something", "-value:xyz", $"-type:{ValueType.String}"},
                 3,
-            }
+            },
+            new object[]
+            {
+                new ParserExpectedResults<AdvancedRunCommand>(
+                    command => command.Program(default(FileInfo)),
+                    new Dictionary<string, string>()
+                    {
+                        {"path", "C:\\advancedrun\\something.exe"}
+                    }
+                ),
+                new[] {"run", "-path", "C:\\advancedrun\\something.exe"},
+                1,
+            },
         };
 
         [Theory]

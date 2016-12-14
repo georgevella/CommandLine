@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="CommandDescriptorFactoryTests.cs" />
     <Compile Include="CommandInvokerTests.cs" />
+    <Compile Include="CommandLineInterfaceTests.cs" />
     <Compile Include="Commands\CommandWithoutAttribute.cs" />
     <Compile Include="Commands\ConfigCommand.cs" />
     <Compile Include="Commands\RunCommand.cs" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CommandLine.Factories;
 using CommandLine.Model;
 
 namespace CommandLine.Parser
@@ -133,20 +134,27 @@ namespace CommandLine.Parser
                             // or next argument is a switch
                             // verify if named argument can live without a value
                             if (!argumentDescriptor.IsBooleanSwitch)
+                            {
                                 return new ParserResult(ParserResultType.MissingArgumentValue,
                                     commandDescriptor,
                                     actionDescriptor,
                                     argumentDescriptor);
-                        }
+                            }
 
-                        // read value and increment for-loop counter
-                        value = args[++i];
+                            // arg is boolean, set value to true (because user did not supply one)
+                            value = bool.TrueString;
+                        }
+                        else
+                        {
+                            // read value and increment for-loop counter
+                            value = args[++i];
+                        }
                     }
 
                     // check if argument has allowed values list
-                    if (argumentDescriptor.AllowedValues.Any())
+                    if (value != null)
                     {
-                        if (!argumentDescriptor.AllowedValues.Contains(value.ToLower()))
+                        if (!argumentDescriptor.Validator.IsValid(value))
                         {
                             return new ParserResult(ParserResultType.ArgumentValueInvalid,
                                 commandDescriptor,

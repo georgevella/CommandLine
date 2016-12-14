@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using CommandLine.Attributes;
 using CommandLine.Extensions;
@@ -8,14 +9,9 @@ namespace CommandLine.Factories
 {
     public static class ApplicationDescriptionFactory
     {
-        public static ApplicationDescription BuildFromAllCommandsInAssembly(Assembly assembly)
+        public static ApplicationDescription BuildFromAllCommandsInAssembly(IEnumerable<CommandDescriptor> commandDescriptors)
         {
-            var commandTypes = assembly.GetTypes()
-                .Where(t => t.HasCustomAttribute<CommandAttribute>())
-                .Select(CommandDescriptorFactory.CreateFor)
-                .ToList();
-
-            return new ApplicationDescription(commandTypes);
+            return new ApplicationDescription(commandDescriptors);
         }
 
         public static ApplicationDescription BuildFromType<T>() where T : class

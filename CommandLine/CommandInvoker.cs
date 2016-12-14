@@ -46,17 +46,12 @@ namespace CommandLine
 
                 var parsedArgument = _args[arg.Name];
 
-                var actualValue = ChangeType(parsedArgument.Value, arg);
+                var actualValue = arg.ValueProvider.GetValue(parsedArgument.Value);
 
                 arg.Setter.SetValue(methodArguments, actualValue);
             }
 
             _action.MethodInfo.Invoke(_commandInstance, methodArguments.ToArray());
-        }
-
-        private object ChangeType(string rawValue, ArgumentDescriptor argumentDescriptor)
-        {
-            return Convert.ChangeType(rawValue, argumentDescriptor.Type);
         }
     }
 }

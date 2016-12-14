@@ -12,6 +12,8 @@ namespace CommandLine.Model
             string name,
             Type type,
             IValueSetter setter,
+            IArgumentValidator validator,
+            IArgumentValueProvider valueProvider,
             string shortName = null,
             bool isOptional = false,
             object defaultValue = null,
@@ -21,6 +23,8 @@ namespace CommandLine.Model
             Name = name;
             Type = type;
             Setter = setter;
+            Validator = validator;
+            ValueProvider = valueProvider;
             ShortName = shortName;
             IsOptional = isOptional;
             DefaultValue = defaultValue;
@@ -42,7 +46,6 @@ namespace CommandLine.Model
 
         public Type Type { get; }
 
-        public IValueSetter Setter { get; }
 
         public string ShortName { get; }
 
@@ -59,5 +62,10 @@ namespace CommandLine.Model
         public IEnumerable<string> AllowedValues { get; } = Enumerable.Empty<string>();
 
         public bool IsBooleanSwitch { get; }
+        public IArgumentValidator Validator { get; }
+
+        public IArgumentValueProvider ValueProvider { get; }
+
+        public IValueSetter Setter { get; }
     }
 }
