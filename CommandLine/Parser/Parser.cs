@@ -47,6 +47,7 @@ namespace CommandLine.Parser
 
                 if (commandDescriptor.Actions.ContainsKey(possibleActionName))
                 {
+                    // second argument is an action identifier
                     actionDescriptor = commandDescriptor.Actions[possibleActionName];
                 }
                 else

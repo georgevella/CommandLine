@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Threading;
+﻿using System.Collections.Generic;
 using CommandLine.Factories;
 using CommandLine.Model;
 using CommandLine.Parser;
 using CommandLine.Tests.Commands;
+using CommandLine.Tests.Utils;
 using FluentAssertions;
 using Xunit;
-using Xunit.Extensions;
 using ValueType = CommandLine.Tests.Commands.ValueType;
 
 namespace CommandLine.Tests
@@ -72,6 +66,18 @@ namespace CommandLine.Tests
             new object[]
             {
                 new ParserExpectedResults<ConfigCommand>(
+                    command => command.Get(default(string)),
+                    new Dictionary<string, string>()
+                    {
+                        {"name", "something" }
+                    }
+                    ),
+                new[] { "config", "get", "-name", "something"},
+                1,
+            },
+            new object[]
+            {
+                new ParserExpectedResults<ConfigCommand>(
                     command => command.Set(default(string), default(string), ValueType.String),
                     new Dictionary<string, string>()
                     {
@@ -106,37 +112,5 @@ namespace CommandLine.Tests
                     .Contain(x => x.Descriptor.Name == expectedArg.Key && x.Value == expectedArg.Value);
             }
         }
-    }
-
-    public class ParserExpectedResults<T> : IParserTestData
-        where T : class
-    {
-        private readonly Expression<Action<T>> _action;
-
-        public ParserExpectedResults(Expression<Action<T>> action, Dictionary<string, string> expectedArguments)
-        {
-            _action = action;
-            ExpectedArguments = expectedArguments;
-        }
-
-        public Dictionary<string, string> ExpectedArguments { get; }
-
-        public Type GetCommandType()
-        {
-            return typeof(T);
-        }
-
-        public MethodInfo GetActionMethod()
-        {
-            var expectedActionMethod = ((MethodCallExpression)_action.Body).Method;
-            return expectedActionMethod;
-        }
-    }
-
-    public interface IParserTestData
-    {
-        Type GetCommandType();
-        MethodInfo GetActionMethod();
-        Dictionary<string, string> ExpectedArguments { get; }
     }
 }

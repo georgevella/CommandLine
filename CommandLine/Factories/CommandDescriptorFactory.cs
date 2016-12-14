@@ -9,7 +9,7 @@ using CommandLine.Model;
 
 namespace CommandLine.Factories
 {
-    internal class CommandDescriptorFactory
+    internal static class CommandDescriptorFactory
     {
         public static CommandDescriptor CreateFor<T>()
             where T : class
@@ -49,16 +49,18 @@ namespace CommandLine.Factories
             // find the default action
             if (actionList.Count == 1)
             {
+                // command declares a single action, assume it's default and that no actions are available
+                // to the user.
                 defaultAction = actionList.First();
                 actionList.Clear();
             }
             else
             {
+                // multiple actions are available, check which action has the IsDefault flag set and use that
+                // as the default action
                 if (actionList.Count(descriptor => descriptor.IsDefault) > 1)
                     throw new InvalidOperationException("Only one action can be tagged as default.");
                 defaultAction = actionList.FirstOrDefault(x => x.IsDefault);
-                if (defaultAction != null)
-                    actionList.Remove(defaultAction);
             }
 
             // fetch description

@@ -84,7 +84,11 @@ namespace CommandLine.Tests
             descriptor.DefaultAction.Arguments.Select(x => x.Name)
                 .Should().Contain(expectedDefaultActionArguments);
 
-            descriptor.Actions.Should().HaveCount(1);
+            descriptor.Actions.Should().HaveCount(2);
+            descriptor.Actions.Select(x => x.Value.MethodInfo).Should().Contain(new[]
+            {
+                expectedActionMethod, expectedDefaultMethod
+            });
         }
     }
 }

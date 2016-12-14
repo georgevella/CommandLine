@@ -1,6 +1,6 @@
-using CommandLine.Model;
+using CommandLine.Parser;
 
-namespace CommandLine.Parser
+namespace CommandLine.Model
 {
     internal class ParserResult
     {
