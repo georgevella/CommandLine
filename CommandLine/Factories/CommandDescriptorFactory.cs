@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using CommandLine.Attributes;
-using CommandLine.Extensions;
+using CommandLine.Internals.Extensions;
 using CommandLine.Model;
 
 namespace CommandLine.Factories

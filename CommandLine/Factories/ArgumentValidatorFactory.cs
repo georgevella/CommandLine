@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using CommandLine.Contracts;
-using CommandLine.Extensions;
 using CommandLine.Validators;
 
 namespace CommandLine.Factories

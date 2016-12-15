@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace CommandLine.Extensions
+namespace CommandLine.Internals.Extensions
 {
     public static class TypeExtensions
     {

@@ -7,7 +7,7 @@ namespace CommandLine.Attributes
     {
         public string Name { get; set; }
 
-        public string ShortName { get; set; }
+        public char ShortName { get; set; }
 
         public bool IsOptional { get; set; }
     }

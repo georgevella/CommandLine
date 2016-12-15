@@ -41,7 +41,7 @@ namespace CommandLine.Parser
             var position = 0;
             var startIndex = 2;
 
-            if (!IsSwitch(args[1]))
+            if (args.Length > 1 && !IsSwitch(args[1]))
             {
                 // second argument is not a switch, determine if its ana action
                 var possibleActionName = args[1];

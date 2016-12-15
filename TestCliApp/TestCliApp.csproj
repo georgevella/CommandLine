@@ -43,11 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ConfigCommand.cs" />
+    <Compile Include="Commands\ListCommand.cs" />
+    <Compile Include="Commands\SourcesCommand.cs" />
+    <Compile Include="Commands\VersionCommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommandLine\CommandLine.csproj">
+      <Project>{899EB9CB-5F12-41AB-805F-170929EA2A85}</Project>
+      <Name>CommandLine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

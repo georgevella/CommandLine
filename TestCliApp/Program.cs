@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommandLine;
 
 namespace TestCliApp
 {
@@ -10,14 +11,12 @@ namespace TestCliApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Arguments:");
+            var cli = new CommandLineInterface();
 
-            for (int i = 0; i < args.Length; i++)
-            {
-                Console.WriteLine($"[{i}]: {args[i]}");
-            }
+            cli.AutoDiscoverCommands();
+            cli.Run(args);
 
-            Console.WriteLine("done.");
+            Console.ReadKey();
         }
     }
 }

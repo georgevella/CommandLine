@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using CommandLine.Extensions;
+using CommandLine.Internals.Extensions;
 using FluentAssertions;
 using Xunit;
 

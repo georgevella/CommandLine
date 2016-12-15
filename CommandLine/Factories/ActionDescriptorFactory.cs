@@ -5,8 +5,8 @@ using System.IO;
 using System.Linq;
 using CommandLine.Attributes;
 using System.Reflection;
-using CommandLine.Extensions;
 using CommandLine.Internals;
+using CommandLine.Internals.Extensions;
 using CommandLine.Model;
 using CommandLine.ValueSetters;
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CommandLine.Model
@@ -11,6 +12,8 @@ namespace CommandLine.Model
         {
             _commandMap = commands.ToDictionary(x => x.Command);
         }
+
+        public IEnumerable<CommandDescriptor> Commands => _commandMap.Values;
 
         public bool IsKnownCommand(string command)
         {

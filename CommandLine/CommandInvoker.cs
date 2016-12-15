@@ -40,6 +40,9 @@ namespace CommandLine
             {
                 if (!_args.Contains(arg.Name))
                 {
+                    if (arg.IsOptional)
+                        continue;
+
                     // argument is missing from CLI args
                     throw new InvalidOperationException();
                 }

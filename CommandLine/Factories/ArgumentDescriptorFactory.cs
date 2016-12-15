@@ -35,7 +35,7 @@ namespace CommandLine.Factories
                 new MethodArgumentValueSetter(param),
                 validator,
                 valueProvider,
-                argumentAttribute.ShortName,
+                $"{argumentAttribute.ShortName}",
                 argumentAttribute.IsOptional,
                 defaultValueAttribute?.Value,
                 descriptionAttribute?.Description

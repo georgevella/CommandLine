@@ -44,14 +44,19 @@
     <Compile Include="CommandLineInterface.cs" />
     <Compile Include="Contracts\IArgumentValidator.cs" />
     <Compile Include="Contracts\IArgumentValueProvider.cs" />
-    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Internals\Extensions\StringExtensions.cs" />
+    <Compile Include="Internals\Extensions\TypeExtensions.cs" />
     <Compile Include="Factories\ApplicationDescriptionFactory.cs" />
     <Compile Include="Factories\ArgumentDescriptorFactory.cs" />
     <Compile Include="Factories\ArgumentValidatorFactory.cs" />
     <Compile Include="Factories\ArgumentValueProviderFactory.cs" />
+    <Compile Include="HelpText\HelpTextPrinter.cs" />
+    <Compile Include="Internals\Commands\HelpCommand.cs" />
+    <Compile Include="Internals\GeneralEqualityComparerer.cs" />
+    <Compile Include="Internals\ReadOnlyStream.cs" />
     <Compile Include="Internals\SupportedPrimitiveTypes.cs" />
     <Compile Include="Model\ActionDescriptor.cs" />
-    <Compile Include="Extensions\MemberInfoExtensions.cs" />
+    <Compile Include="Internals\Extensions\MemberInfoExtensions.cs" />
     <Compile Include="Factories\ActionDescriptorFactory.cs" />
     <Compile Include="Attributes\ActionAttribute.cs" />
     <Compile Include="Attributes\CommandAttribute.cs" />
@@ -97,5 +102,6 @@
     <Compile Include="ValueProvider\UShortValueProvider.cs" />
     <Compile Include="ValueSetters\MethodArgumentValueSetter.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

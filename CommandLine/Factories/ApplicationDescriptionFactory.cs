@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Reflection;
 using CommandLine.Attributes;
-using CommandLine.Extensions;
 using CommandLine.Model;
 
 namespace CommandLine.Factories
