@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\ConfigCommand.cs" />
+    <Compile Include="Commands\FileCommand.cs" />
     <Compile Include="Commands\ListCommand.cs" />
     <Compile Include="Commands\SourcesCommand.cs" />
     <Compile Include="Commands\VersionCommand.cs" />

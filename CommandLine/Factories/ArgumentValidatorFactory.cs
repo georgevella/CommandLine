@@ -35,8 +35,8 @@ namespace CommandLine.Factories
             //{ typeof(StreamWriter), typeof(PathArgumentValidator) },
 
             //// arguments with file-path value
-            //{ typeof(FileInfo), typeof(FilePathArgumentValidator) },
-            //{ typeof(FileStream), typeof(FilePathArgumentValidator) },
+            { typeof(FileInfo), typeof(FilePathArgumentValidator) },
+            { typeof(FileStream), typeof(FilePathArgumentValidator) },
 
             //// arguments with directory-path value
             //{ typeof(DirectoryInfo), typeof(DirectoryPathArgumentValidator) },

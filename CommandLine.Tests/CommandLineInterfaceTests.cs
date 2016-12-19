@@ -32,10 +32,11 @@ namespace CommandLine.Tests
             const string expectedPath = "abc";
             cli.Run(new[] { "run", "-path", expectedPath });
 
-            cli.Command.Should()
+            var command = cli.Command.Should()
                 .NotBeNull()
-                .And.BeOfType<AdvancedRunCommand>()
-                .Which.Path.ToString()
+                .And.BeOfType<AdvancedRunCommand>().Subject;
+
+            command.Path.ToString()
                 .Should().Be(expectedPath);
         }
     }

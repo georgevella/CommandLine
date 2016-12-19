@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Reflection.Emit;
 using CommandLine.Attributes;
 
 namespace CommandLine.Tests.Commands
@@ -22,7 +23,8 @@ namespace CommandLine.Tests.Commands
         public FileInfo Path { get; set; }
 
         [Action]
-        public int Program(FileInfo path)
+        public int Program(
+            [Argument] FileInfo path)
         {
             Path = path;
             return 0;

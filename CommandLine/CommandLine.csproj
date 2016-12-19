@@ -77,6 +77,7 @@
     <Compile Include="Validators\BooleanArgumentValidator.cs" />
     <Compile Include="Validators\DateTimeArgumentValidator.cs" />
     <Compile Include="Validators\EnumArgumentValidator.cs" />
+    <Compile Include="Validators\FilePathArgumentValidator.cs" />
     <Compile Include="Validators\GuidArgumentValidator.cs" />
     <Compile Include="Validators\IntArgumentValidator.cs" />
     <Compile Include="Validators\LongArgumentValidator.cs" />
